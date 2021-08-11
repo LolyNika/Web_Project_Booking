@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * Servlet for displaying information about Guest
+ * @author LolyNika
+ */
 @WebServlet(name = "getGuest", value = "/getGuest")
 public class ServletGuest extends HttpServlet {
     GuestDaoImpl guestDao = new GuestDaoImpl();
@@ -19,6 +23,7 @@ public class ServletGuest extends HttpServlet {
 
     }
 
+    /** A method that outputs information about Guest */
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws  IOException {
         response.setContentType("text/html");
 

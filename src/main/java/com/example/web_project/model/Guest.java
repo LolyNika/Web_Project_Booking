@@ -2,18 +2,22 @@ package com.example.web_project.model;
 
 import lombok.*;
 
+/**
+ * Class with Guest variables (nickname; guest_id; password; email)
+ * @author LolyNika
+ */
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
+
 public class Guest {
 
-    private String nickname;
     private int guest_id;
-    private String password;
-    private String mail;
+    private String nickname, password, mail;
 
 }
 

@@ -7,8 +7,14 @@ import com.example.web_project.dao.Impl.RoomDaoImpl;
 
 import java.util.Scanner;
 
+/**
+ * This class is used to select actions in the console
+ * @author LolyNika
+ */
 public class ControllerSwitch {
     public static int entry;
+
+    /** method Menu with crud operations in the console */
     public void switch_menu(){
         BookingDaoImpl bookingDao = new BookingDaoImpl();
         GuestDaoImpl guestDao = new GuestDaoImpl();

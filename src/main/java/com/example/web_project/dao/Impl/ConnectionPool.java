@@ -2,12 +2,20 @@ package com.example.web_project.dao.Impl;
 
 import java.sql.*;
 
+/**
+ * Connection to MySQL
+ * @author LolyNika
+ */
 public class ConnectionPool {
     private static String dbhost = "jdbc:mysql://localhost:3306/booking";
     private static String username = "admin";
     private static String password = "admin";
     private static Connection conn;
 
+    /**
+     *  The method in which the connection to the database occurs
+     * @return Connection to DB
+     */
     @SuppressWarnings("finally")
     public static Connection createNewDBconnection() {
 
@@ -24,6 +32,7 @@ public class ConnectionPool {
         }
     }
 
+    /** The method that is called when a connection to the database fails and outputs connection errors */
     public static void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {

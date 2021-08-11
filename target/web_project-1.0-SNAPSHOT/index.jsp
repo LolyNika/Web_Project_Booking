@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>JSP - Hello World</title>
 </head>
 <style>
@@ -20,27 +22,42 @@
 </style>
 <body>
 <center>
-    <h1><%= "Test for 02!" %>
-    </h1>
+    <h1>Welcome to Booking Zone</h1>
     <br/>
-    <%--<a> <button href="hello-servlet" type="button">Get Booking</button> </a>--%>
-    <a href="hello-servlet" class="test" >Get Booking</a>
-    <a href="getGuest" class="test">Get Guest</a>
-    <a href="getRoom" class="test">Get Room</a>
-    <%--<a href="servlet-get">Servlet Get</a>--%>
-    <%--<a href="servlet-update">Servlet Update</a>--%>
-    <div>
-        <form action="hello-servlet" target="_blank" class="test_btn">
-            <button>Get Booking</button>
-        </form>
-        <form action="getGuest" target="_blank" class="test_btn">
-            <button>Get Guest</button>
-        </form>
-        <form action="getRoom" target="_blank" class="test_btn">
-            <button>Get Room</button>
-        </form>
+    <a class="btn btn-info" href="hello-servlet" role="button">Hello servlet</a>
+    <a class="btn btn-info" href="getBooking" role="button">Get Booking</a>
+    <a class="btn btn-info" href="getGuest" role="button">Get Guest</a>
+    <a class="btn btn-info" href="getRoom" role="button">Get Room</a>
 
-        <p><img src="qtBkQgG26a0.jpg" alt="Письма мастера дзен"></p>
+<%--    <script>--%>
+<%--        var table = document.getElementById('tableContents');--%>
+<%--        var tableContents = '<tr><td>'+nameArray[0]+'</td><td>'+scoreArray[0]+'</td></tr>';--%>
+<%--        table.innerHTML = tableContents;--%>
+<%--    </script>--%>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Room Type</th>
+            <th scope="col">Contact Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="bookings" items="${bookings}">
+            <tr>
+                <td>${bookings.booking_id}</td>
+                <td>${bookings.date}</td>
+                <td>${bookings.comment}</td>
+                <td>${bookings.room.type}</td>
+                <td>${bookings.guest.mail}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <div>
+<%--        <p><img src="qtBkQgG26a0.jpg" alt="Анимэ"></p>--%>
     </div>
 </center>
 </body>

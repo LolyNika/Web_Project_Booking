@@ -1,7 +1,6 @@
 package com.example.web_project.dao.Impl;
 
-import com.example.web_project.dao.IGuestDao;
-import com.example.web_project.model.Booking;
+import com.example.web_project.dao.GuestDao;
 import com.example.web_project.model.Guest;
 
 import java.sql.*;
@@ -10,7 +9,11 @@ import java.util.Scanner;
 
 import static com.example.web_project.dao.Impl.ConnectionPool.printSQLException;
 
-public class GuestDaoImpl implements IGuestDao {
+/**
+ * A class that implements CRUD operations on Guest
+ * @author LolyNika
+ */
+public class GuestDaoImpl implements GuestDao {
 
     private static final String createTableGUEST = "CREATE TABLE `booking`.`guest` (\n" +
             "  `id_guest` INT NOT NULL AUTO_INCREMENT,\n" +
@@ -31,6 +34,10 @@ public class GuestDaoImpl implements IGuestDao {
 
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     *  A method that outputs information about Booking
+     * @return ArrayList<Guest>
+     */
     @Override
     public ArrayList<Guest> getGuest() {
 
@@ -65,6 +72,7 @@ public class GuestDaoImpl implements IGuestDao {
         return guests;
     }
 
+    /** Method that creates the Guest table */
     @Override
     public void createGuest() {
         System.out.println(createTableGUEST);
@@ -82,6 +90,7 @@ public class GuestDaoImpl implements IGuestDao {
 
     }
 
+    /** A method that deletes information about a specific user in the Guest table */
     @Override
     public void deleteGuest() {
 
@@ -101,6 +110,7 @@ public class GuestDaoImpl implements IGuestDao {
         }
     }
 
+    /** A method that updates information about a specific user in the Guest table */
     @Override
     public void updateGuest() {
         System.out.println("Enter the id");
@@ -128,6 +138,7 @@ public class GuestDaoImpl implements IGuestDao {
         }
     }
 
+    /** A method that adds information about a new user to the Guest table */
     public void insert_Guest(){
         System.out.println("Enter the id");
         int ins_id_g = scanner.nextInt();
@@ -153,72 +164,3 @@ public class GuestDaoImpl implements IGuestDao {
         }
     }
 }
-
-
-
-
-//    Booking booking = new Booking ();
-//    Guest searchGuest = new Guest ();
-//
-//    public void searchAccount (){
-//        System.out.println("ВХОД В АККАУНТ");
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Введите имя: ");
-//        String nickname = scanner.next();
-//        System.out.println("Введите пароль: ");
-//        String password = scanner.next();
-//
-//        booking.searchGuests(nickname, password);
-//        //for (int i = 0; i < booking.getGuests().size(); i++) {
-////        if(nickname.equals(searchGuest.getNickname()) && password.equals(searchGuest.getPassword())) {
-////                System.out.println("Совпадение найдено");
-////        } else {
-////            System.out.println("Совпадение НЕ найдено");
-////        }
-//    //}
-//    }
-//
-//    @Override
-//    public void getGuest() {
-//        //System.out.println(guest.toString());
-//
-//        System.out.println(booking.getGuests().toString());
-//////        Booking getGuestsView = new Booking();
-////        //getGuestsView.getGuests();
-////
-////        System.out.println("Информация о клиентах:");
-////        for (int i = 0; i < book.getGuests().size(); i++) {
-////            System.out.println(book.getGuests().get(i));
-////        }
-//    }
-//
-//    @Override
-//    public void createGuest() {
-//
-//        System.out.println("Регистрация аккаунта");
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Введите имя:");
-//        String nickname = scanner.next();
-//        System.out.println("Введите пароль:");
-//        String password = scanner.next();
-//        System.out.println("Введите почту:");
-//        String mail = scanner.next();
-//        Guest guest = new Guest(nickname, password, mail);
-////        ArrayList<Guest> guestsLogin = new ArrayList<>();
-////        guestsLogin.add(guest);
-//
-////        guest.setMail(mail);
-////        guest.setNickname(nickname);
-////        guest.setPassword(mail);
-//
-//        booking.addGuest(nickname, password, mail);
-//        System.out.println("Вы успешно зарегистрировались на сайте CyberBOOLING");
-//
-////        ArrayList<Guest> inta = booking.addGuest(nickname, password, mail);
-////        booking.setGuests(guestsLogin);
-//        System.out.println("Информация о клиентах:");
-//        for (int i = 0; i < booking.getGuests().size(); i++) {
-//            System.out.println(booking.getGuests().get(i));
-//        }
-//    }

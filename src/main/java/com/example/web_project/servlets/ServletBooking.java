@@ -1,7 +1,7 @@
 package com.example.web_project.servlets;
 
-import com.example.web_project.dao.Impl.RoomDaoImpl;
-import com.example.web_project.model.Room;
+import com.example.web_project.dao.Impl.BookingDaoImpl;
+import com.example.web_project.model.Booking;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,26 +12,26 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Servlet for displaying information about Room
+ * Servlet for displaying information about Booking
  * @author LolyNika
  */
-@WebServlet(name = "getRoom", value = "/getRoom")
-public class ServletRoom extends HttpServlet {
-    RoomDaoImpl roomDao = new RoomDaoImpl();
+@WebServlet(name = "ServletBooking", value = "/getBooking")
+public class ServletBooking extends HttpServlet {
+
+    BookingDaoImpl bookingDao1 = new BookingDaoImpl();
 
     public void init() {
-
     }
 
-    /** A method that outputs information about Room */
+    /** A method that outputs information about Booking */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
         PrintWriter out = response.getWriter();
-        out.println("info: " + roomDao.getRoom());
+        out.println("info" + bookingDao1.getBooking());
+
     }
 
     public void destroy() {
-
     }
 }

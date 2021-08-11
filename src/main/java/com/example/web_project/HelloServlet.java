@@ -1,7 +1,9 @@
 package com.example.web_project;
 
 import com.example.web_project.dao.Impl.BookingDaoImpl;
+import com.example.web_project.model.Booking;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,17 +20,18 @@ import javax.servlet.annotation.*;
 public class HelloServlet extends HttpServlet {
 
     BookingDaoImpl bookingDao1 = new BookingDaoImpl();
-    //String rest;
-    //rest = bookingDao1.getBooking();
 
     public void init() {
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
-        out.println("info" + bookingDao1.getBooking());
+        ArrayList<Booking> bookings = bookingDao1.getBooking();
+        request.setAttribute("bookings", bookings);
+
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+
+
 
     }
 

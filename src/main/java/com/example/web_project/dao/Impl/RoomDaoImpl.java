@@ -1,7 +1,6 @@
 package com.example.web_project.dao.Impl;
 
-import com.example.web_project.dao.IRoomDao;
-import com.example.web_project.model.Guest;
+import com.example.web_project.dao.RoomDao;
 import com.example.web_project.model.Room;
 
 import java.sql.*;
@@ -10,7 +9,11 @@ import java.util.Scanner;
 
 import static com.example.web_project.dao.Impl.ConnectionPool.printSQLException;
 
-public class RoomDaoImpl implements IRoomDao {
+/**
+ * A class that implements CRUD operations on Room
+ * @author LolyNika
+ */
+public class RoomDaoImpl implements RoomDao {
     private static final String createTableROOM = "CREATE TABLE `booking`.`room` (\n" +
             "  `id_room` INT NOT NULL AUTO_INCREMENT,\n" +
             "  `type` VARCHAR(45) NOT NULL,\n" +
@@ -29,6 +32,10 @@ public class RoomDaoImpl implements IRoomDao {
 
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     *  A method that outputs information about Booking
+     * @return ArrayList<Room>
+     */
     @Override
     public ArrayList<Room> getRoom() {
 
@@ -62,6 +69,7 @@ public class RoomDaoImpl implements IRoomDao {
         return rooms;
     }
 
+    /** Method that creates the Room table */
     @Override
     public void createRoom() {
         System.out.println(createTableROOM);
@@ -78,6 +86,7 @@ public class RoomDaoImpl implements IRoomDao {
         }
     }
 
+    /** A method that deletes information about a specific user in the Room table */
     @Override
     public void deleteRoom() {
         System.out.println("Enter the id you want to delete");
@@ -97,6 +106,7 @@ public class RoomDaoImpl implements IRoomDao {
         }
     }
 
+    /** A method that updates information about a specific user in the Room table */
     @Override
     public void updateRoom() {
 
@@ -123,6 +133,7 @@ public class RoomDaoImpl implements IRoomDao {
         }
     }
 
+    /** A method that adds information about a new user to the Room table */
     public void insert_Room(){
 
         System.out.println("Enter the id");

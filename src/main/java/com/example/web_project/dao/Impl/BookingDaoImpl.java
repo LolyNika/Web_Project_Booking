@@ -1,19 +1,21 @@
 package com.example.web_project.dao.Impl;
 
-import com.example.web_project.dao.IBookingDao;
+import com.example.web_project.dao.BookingDao;
 import com.example.web_project.model.Booking;
 import com.example.web_project.model.Guest;
 import com.example.web_project.model.Room;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static com.example.web_project.dao.Impl.ConnectionPool.printSQLException;
 
-
-public class BookingDaoImpl implements IBookingDao {
+/**
+ * A class that implements CRUD operations on Booking
+ * @author LolyNika
+ */
+public class BookingDaoImpl implements BookingDao {
 
     private static final String createTableBOOKING = "CREATE TABLE `booking`.`booking` (\n" +
             "  `id_booking` INT NOT NULL AUTO_INCREMENT,\n" +
@@ -39,19 +41,15 @@ public class BookingDaoImpl implements IBookingDao {
     public static String res = null;
 
     Scanner scanner = new Scanner(System.in);
-//    java.util.Date today = new java.util.Date();
-//    long t = today.getTime();
 
+    /**
+     *  A method that outputs information about Booking
+     * @return ArrayList<Booking>
+     */
     @Override
     public ArrayList<Booking> getBooking() {
-//        List<Booking> bookings1 = new ArrayList<Booking>();
-//        for (Booking booking1 : bookings) {
-//            System.out.println(" Id booking:" + booking1.getBooking_id() + "; Id комнаты: " + booking1.getRoom().getRoom_id() + "; Комната заблокирована(1-да, 0-нет): " + booking1.getRoom().getIs_blocked()
-//                    + "; Тип комнаты: " + booking1.getRoom().getType() + "; Id гостя: " + booking1.getGuest().getGuest_id() + "; Email гостя: " + booking1.getGuest().getMail() + "; Имя гостя: " + booking1.getGuest().getNickname());
-//
-//        }
-//        return bookings1;
         ArrayList<Booking> bookings = new ArrayList<Booking>();
+
         try (Connection connection = ConnectionPool.createNewDBconnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement(getFULL_booking);) {
@@ -82,20 +80,6 @@ public class BookingDaoImpl implements IBookingDao {
                 booking.setRoom(room);
 
                 bookings.add(booking);
-
-//                int id_b = rs.getInt("id_booking");
-//                String datetime = rs.getString("datetime");
-//                String comm = rs.getString("comment");
-//                int id_g = rs.getInt("id_booking");
-//                String nickname = rs.getString("nickname");
-//                String password = rs.getString("password");
-//                String email = rs.getString("email");
-//                int id_room = rs.getInt("id_room");
-//                String type = rs.getString("type");
-//                int is_blocked = rs.getInt("is_blocked");
-
-                //System.out.println(id_b + "," + datetime + "," + comm + "," + id_g + "," + nickname + "," + password + "," + email + "," + id_room + "," + type + "," + is_blocked);
-                //res = id_b + datetime + comm + id_g + nickname + password + email + id_room + type + is_blocked;
             }
             System.out.println("Successfully Join tables");
         } catch (SQLException e) {
@@ -104,6 +88,7 @@ public class BookingDaoImpl implements IBookingDao {
         return bookings;
     }
 
+    /** Method that creates the Booking table */
     @Override
     public void createBooking() {
 
@@ -121,6 +106,7 @@ public class BookingDaoImpl implements IBookingDao {
         }
     }
 
+    /** A method that deletes information about a specific user in the Booking table */
     @Override
     public void deleteBooking() {
         System.out.println("Enter the id you want to delete");
@@ -142,6 +128,7 @@ public class BookingDaoImpl implements IBookingDao {
         }
     }
 
+    /** A method that updates information about a specific user in the Booking table */
     @Override
     public void updateBooking() {
 
@@ -189,6 +176,7 @@ public class BookingDaoImpl implements IBookingDao {
         }
     }
 
+    /** A method that adds information about a new user to the Booking table */
     public void insert_Booking() {
 
         System.out.println("Enter the id");
@@ -200,7 +188,6 @@ public class BookingDaoImpl implements IBookingDao {
 
              PreparedStatement preparedStatement = connection.prepareStatement(insert_Booking)) {
             preparedStatement.setInt(1, ins_id_b);
-//            preparedStatement.setDate(2, new java.sql.Date(t));
             preparedStatement.setString(2, ins_comm);
 
             System.out.println(preparedStatement);
@@ -211,6 +198,7 @@ public class BookingDaoImpl implements IBookingDao {
         }
     }
 
+    /** Method for searching for information about an existing user in the Booking table */
     public void search_Booking() {
         int number_id;
         Scanner scanner1 = new Scanner(System.in);

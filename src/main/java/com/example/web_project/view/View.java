@@ -3,8 +3,13 @@ package com.example.web_project.view;
 
 import java.util.Scanner;
 
+/**
+ * This class is used to display actions in the console
+ * @author LolyNika
+ */
 public class View {
 
+    /** Method that outputs CRUD operations to the console */
     public static void menu() {
         System.out.println("1) Create table Booking");
         System.out.println("2) Create table Guest");
@@ -24,12 +29,14 @@ public class View {
         System.out.println("16) Searching in table Booking по ID!!!");
     }
 
+    /** Method that outputs info to entrance to Account to the console */
     public void entranceAcc() {
         System.out.println("Вход в аккаунт");
         System.out.println("1 - Создать новый аккаунт");
         System.out.println("2 - Войти в аккаунт");
     }
 
+    /** Method to entrance to Account to the console */
     public void accountLogin() {
         System.out.println("ВХОД В АККАУНТ");
         Scanner scanner = new Scanner(System.in);
@@ -49,13 +56,5 @@ public class View {
 //            System.out.println("Error to access");
 //        }
         System.out.println("Вы успешно вошли в аккаунт");
-    }
-
-    public void createAccount(){
-
-    }
-
-    public void searchRoom(Integer room_id) {
-        System.out.println();
     }
 }

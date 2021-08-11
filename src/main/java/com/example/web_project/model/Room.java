@@ -2,6 +2,11 @@ package com.example.web_project.model;
 
 import lombok.*;
 
+/**
+ * Class with Room variables (room_id; type; is_blocked)
+ * @author LolyNika
+ */
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -11,8 +16,7 @@ import lombok.*;
 
 public class Room {
 
-    private int room_id;
+    private int room_id, is_blocked;
     private String type;
-    private int is_blocked;
 
 }
