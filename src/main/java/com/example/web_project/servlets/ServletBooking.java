@@ -17,21 +17,15 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "ServletBooking", value = "/getBooking")
 public class ServletBooking extends HttpServlet {
-
     BookingDaoImpl bookingDao1 = new BookingDaoImpl();
-
     public void init() {
     }
-
     /** A method that outputs information about Booking */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-
         PrintWriter out = response.getWriter();
         out.println("info" + bookingDao1.getBooking());
-
     }
-
     public void destroy() {
     }
 }

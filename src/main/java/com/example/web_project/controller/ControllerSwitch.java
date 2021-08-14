@@ -5,6 +5,7 @@ import com.example.web_project.dao.Impl.BookingDaoImpl;
 import com.example.web_project.dao.Impl.GuestDaoImpl;
 import com.example.web_project.dao.Impl.RoomDaoImpl;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,9 +14,8 @@ import java.util.Scanner;
  */
 public class ControllerSwitch {
     public static int entry;
-
     /** method Menu with crud operations in the console */
-    public void switch_menu(){
+    public void switch_menu() {
         BookingDaoImpl bookingDao = new BookingDaoImpl();
         GuestDaoImpl guestDao = new GuestDaoImpl();
         RoomDaoImpl roomDao = new RoomDaoImpl();

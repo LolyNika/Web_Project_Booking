@@ -18,20 +18,14 @@ import java.io.PrintWriter;
 @WebServlet(name = "getRoom", value = "/getRoom")
 public class ServletRoom extends HttpServlet {
     RoomDaoImpl roomDao = new RoomDaoImpl();
-
     public void init() {
-
     }
-
     /** A method that outputs information about Room */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-
         PrintWriter out = response.getWriter();
         out.println("info: " + roomDao.getRoom());
     }
-
     public void destroy() {
-
     }
 }

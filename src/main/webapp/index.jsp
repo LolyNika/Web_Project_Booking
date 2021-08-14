@@ -1,10 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>ZeroTwo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
     .test {
@@ -16,6 +19,7 @@
         border-radius: 3px; /* Скругляем уголки */
         margin-left: 40px;
     }
+
     .test_btn {
         margin: 20px;
     }
@@ -24,11 +28,40 @@
 <center>
     <h1>Welcome to Booking Zone</h1>
     <br/>
-    <a class="btn btn-info" href="hello-servlet" role="button">Hello servlet</a>
-    <a class="btn btn-info" href="getBooking" role="button">Get Booking</a>
-    <a class="btn btn-info" href="getGuest" role="button">Get Guest</a>
-    <a class="btn btn-info" href="getRoom" role="button">Get Room</a>
-    <table class="table table-hover">
+    <a class="btn btn-info test_btn" href="data-servlet" role="button">Get data for table</a>
+    <a class="btn btn-info test_btn" href="getBooking" role="button">Get Booking</a>
+    <a class="btn btn-info test_btn" href="getGuest" role="button">Get Guest</a>
+    <a class="btn btn-info test_btn" href="getRoom" role="button">Get Room</a>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, a, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            /**
+             * if you need make search only for one cologne - delete for (a) and "break;",
+             * and instead [a] -> [number cologne]
+             */
+            for (i = 0; i < tr.length; i++) {
+                for (a = 0; a < 5; a++) {
+                    td = tr[i].getElementsByTagName("td")[a];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <table id="myTable" class="table table-hover test_btn">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -50,8 +83,6 @@
         </c:forEach>
         </tbody>
     </table>
-    <div>
-<%--        <p><img src="qtBkQgG26a0.jpg" alt="Анимэ"></p>--%>
     </div>
 </center>
 </body>

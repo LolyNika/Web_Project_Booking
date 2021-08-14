@@ -18,20 +18,14 @@ import java.util.ArrayList;
 @WebServlet(name = "getGuest", value = "/getGuest")
 public class ServletGuest extends HttpServlet {
     GuestDaoImpl guestDao = new GuestDaoImpl();
-
     public void init() {
-
     }
-
     /** A method that outputs information about Guest */
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws  IOException {
         response.setContentType("text/html");
-
         PrintWriter out = response.getWriter();
         out.println("info: " + guestDao.getGuest());
     }
-
     public void destroy() {
-
     }
 }

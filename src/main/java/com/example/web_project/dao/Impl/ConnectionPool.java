@@ -1,28 +1,34 @@
 package com.example.web_project.dao.Impl;
 
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Properties;
 
 /**
  * Connection to MySQL
  * @author LolyNika
  */
 public class ConnectionPool {
-    private static String dbhost = "jdbc:mysql://localhost:3306/booking";
-    private static String username = "admin";
-    private static String password = "admin";
+//    private static String dbhost = "jdbc:mysql://localhost:3306/booking";
+//    private static String username = "admin";
+//    private static String password = "admin";
     private static Connection conn;
-
     /**
      *  The method in which the connection to the database occurs
      * @return Connection to DB
      */
     @SuppressWarnings("finally")
     public static Connection createNewDBconnection() {
-
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Properties props = new Properties();
+            props.load(new FileInputStream("C:/Users/ronin/Desktop/Web_Project_booking/src/main/resources/configuration/connectdb.properties"));
+            String theUser = props.getProperty("user");
+            String thePassword = props.getProperty("password");
+            String theDBurl = props.getProperty("dburl");
+            String theDriver = props.getProperty("driver");
+            Class.forName(theDriver);
             conn = DriverManager.getConnection(
-                    dbhost, username, password);
+                    theDBurl, theUser, thePassword);
             System.out.println("Successfully create connect to DB");
         } catch (SQLException e) {
             System.out.println("Cannot create database connection");
@@ -31,7 +37,6 @@ public class ConnectionPool {
             return conn;
         }
     }
-
     /** The method that is called when a connection to the database fails and outputs connection errors */
     public static void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

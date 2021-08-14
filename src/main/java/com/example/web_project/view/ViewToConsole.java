@@ -7,8 +7,7 @@ import java.util.Scanner;
  * This class is used to display actions in the console
  * @author LolyNika
  */
-public class View {
-
+public class ViewToConsole {
     /** Method that outputs CRUD operations to the console */
     public static void menu() {
         System.out.println("1) Create table Booking");
@@ -28,28 +27,22 @@ public class View {
         System.out.println("15) Delete data from the table Room");
         System.out.println("16) Searching in table Booking по ID!!!");
     }
-
     /** Method that outputs info to entrance to Account to the console */
     public void entranceAcc() {
         System.out.println("Вход в аккаунт");
         System.out.println("1 - Создать новый аккаунт");
         System.out.println("2 - Войти в аккаунт");
     }
-
     /** Method to entrance to Account to the console */
     public void accountLogin() {
         System.out.println("ВХОД В АККАУНТ");
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Введите имя: ");
         String nickname = scanner.next();
         System.out.println("Введите пароль: ");
         String password = scanner.next();
-
         System.out.println("Введите имя: " + nickname);
         System.out.println("Введите пароль: " + password);
-
-
 //        if (nickname == ){
 //            System.out.println("You`re finally access");
 //        } else {
