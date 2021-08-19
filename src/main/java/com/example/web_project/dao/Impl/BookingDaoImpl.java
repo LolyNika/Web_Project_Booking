@@ -13,6 +13,7 @@ import static com.example.web_project.dao.Impl.ConnectionPool.printSQLException;
 
 /**
  * A class that implements BookingDao
+ *
  * @author LolyNika
  */
 public class BookingDaoImpl implements BookingDao {
@@ -36,8 +37,10 @@ public class BookingDaoImpl implements BookingDao {
     private static final String search = "SELECT * FROM booking.booking WHERE id_booking = ";
     private static final String delete = "DELETE FROM booking.booking WHERE id_booking = ";
     Scanner scanner = new Scanner(System.in);
+
     @Override
     public ArrayList<Booking> getBooking() {
+
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         try (Connection connection = ConnectionPool.createNewDBconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getFULL_booking)) {
@@ -67,6 +70,7 @@ public class BookingDaoImpl implements BookingDao {
                 room.setType(rs.getString("type"));
                 room.setIs_blocked(rs.getInt("is_blocked"));
                 booking.setRoom(room);
+
                 bookings.add(booking);
             }
             System.out.println("Successfully Join tables");
@@ -75,6 +79,7 @@ public class BookingDaoImpl implements BookingDao {
         }
         return bookings;
     }
+
     @Override
     public void createBooking() {
         System.out.println(createTableBOOKING);
@@ -86,6 +91,7 @@ public class BookingDaoImpl implements BookingDao {
             printSQLException(e);
         }
     }
+
     @Override
     public void deleteBooking() {
         System.out.println("Enter the id you want to delete");
@@ -100,6 +106,7 @@ public class BookingDaoImpl implements BookingDao {
             printSQLException(e);
         }
     }
+
     @Override
     public void updateBooking() {
         System.out.println("Enter the id");
@@ -142,31 +149,23 @@ public class BookingDaoImpl implements BookingDao {
             printSQLException(e);
         }
     }
+
     @Override
-    public void insert_Booking() {
-        System.out.println("Enter the id");
-        int ins_id_b = scanner.nextInt();
-        System.out.println("Enter the  full price");
-        int ins_full_price = scanner.nextInt();
-        System.out.println("Enter the arrival_date");
-        String ins_arr_date = scanner.next();
-        System.out.println("Enter the departure date");
-        String ins_dep_date = scanner.next();
-        System.out.println("Enter the comment (if u want)");
-        String ins_comm = scanner.next();
+    public void insert_Booking(Booking booking) {
         try (Connection connection = ConnectionPool.createNewDBconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insert_Booking)) {
-            preparedStatement.setInt(1, ins_id_b);
-            preparedStatement.setInt(2, ins_full_price);
-            preparedStatement.setString(3, ins_arr_date);
-            preparedStatement.setString(4, ins_dep_date);
-            preparedStatement.setString(5, ins_comm);
+            preparedStatement.setInt(1, booking.getBooking_id());
+            preparedStatement.setInt(2, booking.getFull_price());
+            preparedStatement.setString(3, booking.getArrival_date());
+            preparedStatement.setString(4, booking.getDeparture_date());
+            preparedStatement.setString(5, booking.getComment());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
         }
     }
+
     /**
      * Method for searching for information about an existing user in the Booking table
      */

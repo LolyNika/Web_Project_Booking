@@ -22,13 +22,13 @@ public interface RoomDao {
      /**
       * A method that deletes information about a specific user in the Room table
       */
-     void deleteRoom () throws SQLException;
+     int deleteRoom (int room_id) throws SQLException;
      /**
       * A method that updates information about a specific user in the Room table
       */
-     void updateRoom () throws SQLException;
+     void updateRoom (Room room) throws SQLException;
      /**
       * A method that adds information about a new user to the Room table
       */
-     void insert_Room() throws SQLException;
+     void insert_Room(Room room) throws SQLException;
 }

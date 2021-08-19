@@ -15,7 +15,7 @@ public class Main {
         ControllerSwitch controllerSwitch = new ControllerSwitch();
         while (true) {
             menu();
-            controllerSwitch.switch_menu();
+            //controllerSwitch.switch_menu();
         }
     }
 }

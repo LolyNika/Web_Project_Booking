@@ -22,10 +22,10 @@ public class ConnectionPool {
         try {
             Properties props = new Properties();
             props.load(new FileInputStream("C:/Users/ronin/Desktop/Web_Project_booking/src/main/resources/configuration/connectdb.properties"));
-            String theUser = props.getProperty("user");
-            String thePassword = props.getProperty("password");
+            String theUser = props.getProperty("db.user");
+            String thePassword = props.getProperty("db.password");
             String theDBurl = props.getProperty("dburl");
-            String theDriver = props.getProperty("driver");
+            String theDriver = props.getProperty("db.driver");
             Class.forName(theDriver);
             conn = DriverManager.getConnection(
                     theDBurl, theUser, thePassword);

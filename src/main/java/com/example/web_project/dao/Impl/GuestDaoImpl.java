@@ -22,12 +22,12 @@ public class GuestDaoImpl implements GuestDao {
             "  `email` VARCHAR(45) NOT NULL,\n" +
             "  PRIMARY KEY (`id_guest`));";
     private static final String select_Guest = "SELECT * FROM booking.guest;";
+    private static final String select_one_Guest = "SELECT * FROM booking.guest WHERE id_guest = ?;";
     private static final String insert_Guest = "INSERT INTO `booking`.`guest`" +
-            "(`id_guest`, `name`, `password`, `email`) VALUES " +
-            "(?, ?, ?, ?);";
+            "(`name`, `password`, `email`) VALUES " +
+            "(?, ?, ?);";
     private static final String update_Guest = "UPDATE booking.guest SET name = ?, password = ?, email = ? WHERE id_guest = ?";
-    private static final String delete_from_Guest = "DELETE FROM booking.guest WHERE id_guest = ";
-    Scanner scanner = new Scanner(System.in);
+    private static final String delete_from_Guest = "DELETE FROM booking.guest WHERE id_guest = ?";
 
     @Override
     public ArrayList<Guest> getGuest() {
@@ -64,59 +64,80 @@ public class GuestDaoImpl implements GuestDao {
     }
 
     @Override
-    public void deleteGuest() {
-        System.out.println("Enter the id");
-        int upd_id_g = scanner.nextInt();
-        String delete_Guest = delete_from_Guest + upd_id_g;
+    public int deleteGuest(int guest_id) {
         try (Connection connection = ConnectionPool.createNewDBconnection();
-             Statement statement = connection.createStatement();) {
-            int result = statement.executeUpdate(delete_Guest);
-            System.out.println("Number of records affected :: " + result);
+             PreparedStatement preparedStatement = connection.prepareStatement(delete_from_Guest)){
+                preparedStatement.setInt(1, guest_id);
+            System.out.println(preparedStatement);
+            return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
         }
+        return 0;
     }
+
     @Override
-    public void updateGuest() {
-        System.out.println("Enter the id");
-        int upd_id_g = scanner.nextInt();
-        System.out.println("Enter the name");
-        String upd_name_g = scanner.next();
-        System.out.println("Enter the password");
-        String upd_pass_g = scanner.next();
-        System.out.println("Enter the email");
-        String upd_email_g = scanner.next();
+    public void updateGuest(Guest guest) {
         try (Connection connection = ConnectionPool.createNewDBconnection();
              PreparedStatement preparedStatement = connection.prepareStatement(update_Guest)) {
-            preparedStatement.setString(1, upd_name_g);
-            preparedStatement.setString(2, upd_pass_g);
-            preparedStatement.setString(3, upd_email_g);
-            preparedStatement.setInt(4, upd_id_g);
+            preparedStatement.setString(1, guest.getName());
+            preparedStatement.setString(2, guest.getPassword());
+            preparedStatement.setString(3, guest.getMail());
+            preparedStatement.setInt(4, guest.getGuest_id());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
         }
     }
+
     @Override
-    public void insert_Guest() {
-        System.out.println("Enter the id");
-        int ins_id_g = scanner.nextInt();
-        System.out.println("Enter the name");
-        String ins_name_g = scanner.next();
-        System.out.println("Enter the password");
-        String ins_pass_g = scanner.next();
-        System.out.println("Enter the email");
-        String ins_email_g = scanner.next();
-        try (Connection connection = ConnectionPool.createNewDBconnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(insert_Guest)) {
-            preparedStatement.setInt(1, ins_id_g);
-            preparedStatement.setString(2, ins_name_g);
-            preparedStatement.setString(3, ins_pass_g);
-            preparedStatement.setString(4, ins_email_g);
-            System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
+    public void insert_Guest(Guest guest) {
+//        try {
+            //Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection connection = ConnectionPool.createNewDBconnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(insert_Guest)) {
+                preparedStatement.setString(1, guest.getName());
+                preparedStatement.setString(2, guest.getPassword());
+                preparedStatement.setString(3, guest.getMail());
+                System.out.println(preparedStatement);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                printSQLException(e);
+            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    public static Guest selectOne(int guest_id) {
+
+        Guest guest = null;
+            try (Connection connection = ConnectionPool.createNewDBconnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(select_one_Guest);){
+                    preparedStatement.setInt(1, guest_id);
+                System.out.println(preparedStatement);
+                ResultSet rs = preparedStatement.executeQuery();
+                    if(rs.next()){
+                        int id_guest = rs.getInt(1);
+                        String name = rs.getString(2);
+                        String password = rs.getString(3);
+                        String email = rs.getString(4);
+                        guest = new Guest(id_guest, name, password, email);
+                    }
+            }
+        catch(SQLException e){
             printSQLException(e);
         }
+        return guest;
     }
 }
+
+
+//System.out.println("Enter the id");
+//        int ins_id_g = scanner.nextInt();
+//        System.out.println("Enter the name");
+//        String ins_name_g = scanner.next();
+//        System.out.println("Enter the password");
+//        String ins_pass_g = scanner.next();
+//        System.out.println("Enter the email");
+//        String ins_email_g = scanner.next();

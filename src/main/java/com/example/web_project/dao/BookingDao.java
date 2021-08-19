@@ -33,5 +33,5 @@ public interface BookingDao {
     /**
      * A method that adds information about a new user to the Booking table
      */
-    void insert_Booking() throws SQLException;
+    void insert_Booking(Booking booking) throws SQLException;
 }
