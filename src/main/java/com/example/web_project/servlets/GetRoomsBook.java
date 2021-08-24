@@ -19,9 +19,14 @@ public class GetRoomsBook extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Room> rooms = roomDao.getRoom();
-        request.setAttribute("rooms", rooms);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        try {
+            ArrayList<Room> rooms = roomDao.getRoom();
+            request.setAttribute("rooms", rooms);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+        catch(Exception ex) {
+            getServletContext().getRequestDispatcher("/notFound.jsp").forward(request, response);
+        }
     }
 
     public void destroy() {

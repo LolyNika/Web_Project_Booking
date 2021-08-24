@@ -1,3 +1,0 @@
-1)There shouldn't be .idea file and iml. files pushed in your pull request. Just only main files that must be for starting your project(java classes and poms and gitignore. Readme too if you want). Nothing else.
-2) I see javadocs in bookingdaoimpl class. Ok, but i talked with senior software developer recently and she says to me that i should i should put javadocs only in the interfaces in dao where it is nessesary. Not in the implementation of this methods.
-3) Make package "views" maybe in the root Web_Project_Booking/src/main/webapp/  because now i see there smth strange.

@@ -26,10 +26,14 @@ public class ServletGetGuest extends HttpServlet {
 //        response.setContentType("text/html");
 //        PrintWriter out = response.getWriter();
 //        out.println("info: " + guestDao.getGuest());
-
-        ArrayList<Guest> guests = guestDao.getGuest();
-        request.setAttribute("guests", guests);
-        getServletContext().getRequestDispatcher("/Guests.jsp").forward(request, response);
+        try {
+            ArrayList<Guest> guests = guestDao.getGuest();
+            request.setAttribute("guests", guests);
+            getServletContext().getRequestDispatcher("/Guests.jsp").forward(request, response);
+        }
+        catch(Exception ex) {
+            getServletContext().getRequestDispatcher("/notFound.jsp").forward(request, response);
+        }
     }
     public void destroy() {
     }

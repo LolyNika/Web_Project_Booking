@@ -27,10 +27,14 @@ public class ServletGetRoom extends HttpServlet {
 //        response.setContentType("text/html");
 //        PrintWriter out = response.getWriter();
 //        out.println("info: " + roomDao.getRoom());
-
-        ArrayList<Room> rooms = roomDao.getRoom();
-        request.setAttribute("rooms", rooms);
-        getServletContext().getRequestDispatcher("/Rooms.jsp").forward(request, response);
+        try {
+            ArrayList<Room> rooms = roomDao.getRoom();
+            request.setAttribute("rooms", rooms);
+            getServletContext().getRequestDispatcher("/Rooms.jsp").forward(request, response);
+        }
+        catch(Exception ex) {
+            getServletContext().getRequestDispatcher("/notFound.jsp").forward(request, response);
+        }
     }
     public void destroy() {
     }

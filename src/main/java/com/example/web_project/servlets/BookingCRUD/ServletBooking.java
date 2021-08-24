@@ -26,10 +26,13 @@ public class ServletBooking extends HttpServlet {
 //        response.setContentType("text/html");
 //        PrintWriter out = response.getWriter();
 //        out.println("info" + bookingDao1.getBooking());
-
-        ArrayList<Booking> bookings = bookingDao1.getBooking();
-        request.setAttribute("bookings", bookings);
-        getServletContext().getRequestDispatcher("/Booking.jsp").forward(request, response);
+        try {
+            ArrayList<Booking> bookings = bookingDao1.getBooking();
+            request.setAttribute("bookings", bookings);
+            getServletContext().getRequestDispatcher("/Booking.jsp").forward(request, response);
+        } catch (Exception ex) {
+            getServletContext().getRequestDispatcher("/notFound.jsp").forward(request, response);
+        }
     }
     public void destroy() {
     }
